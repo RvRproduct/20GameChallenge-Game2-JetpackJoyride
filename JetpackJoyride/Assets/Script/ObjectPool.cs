@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
@@ -34,6 +35,11 @@ public class ObjectPool : MonoBehaviour
                 objectPool[objectPoolPair.poolTag][obj].SetActive(false);
             }
         }   
+    }
+
+    protected List<ObjectPoolPair> GetObjectPoolPairs()
+    {
+        return objectPoolPairs;
     }
 
     protected GameObject GetValidObjectInPool(string _poolTag)

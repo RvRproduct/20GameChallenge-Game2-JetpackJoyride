@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyObstacle : MonoBehaviour, IObstacle
+public class EnemyObstacle : BaseObstacle, IObstacle
 {
     public void ObstacleAction()
     {

@@ -8,7 +8,25 @@ public class ObstacleManager : ObjectPool
     public static ObstacleManager Instance;
 
     [Header("Obstacle Spawn Weights")]
-    private Dictionary<string, float> obstacleWeights;
+    private static readonly Dictionary<string, float> obstacleWeights =
+        new Dictionary<string, float>
+        {
+            { ObstacleTags.NormalObstacle, 0.75f },
+            { ObstacleTags.RotatingObstacle, 0.50f },
+            { ObstacleTags.EnemyObstacle, 0.25f }
+        };
+
+    private Dictionary<string, float> availableObstacleWeights;
+
+    [Header("Obstacle Scale Values")]
+    private static readonly List<float> obstacleScales =
+        new List<float>
+        {
+            { 2.0f },
+            { 4.0f },
+            { 6.0f }
+        };
+
 
     [Header("Spawn Points")]
     [SerializeField] private Transform upperSpawnPoint;
@@ -47,23 +65,29 @@ public class ObstacleManager : ObjectPool
 
     private void SetUpObstacleWeights()
     {
-        obstacleWeights = new Dictionary<string, float>();
-        obstacleWeights.Add(ObstacleTags.NormalObstacle, 0.75f);
-        obstacleWeights.Add(ObstacleTags.RotatingObstacle, 0.50f);
-        obstacleWeights.Add(ObstacleTags.EnemyObstacle, 0.25f);
+        availableObstacleWeights = new Dictionary<string, float>();
+
+        foreach (ObjectPoolPair _objectPool in GetObjectPoolPairs())
+        {
+            if (obstacleWeights.ContainsKey(_objectPool.poolTag))
+            {
+                availableObstacleWeights.Add
+                    (_objectPool.poolTag, obstacleWeights[_objectPool.poolTag]);
+            }
+        }
     }
 
     private string RandomizeObstacleSelection()
     {
         float total = 0;
-        foreach (float weight in obstacleWeights.Values)
+        foreach (float weight in availableObstacleWeights.Values)
         {
             total += weight;
         }
 
         float randomValue = Random.value * total;
 
-        foreach (KeyValuePair<string, float> obstacleWeight in obstacleWeights)
+        foreach (KeyValuePair<string, float> obstacleWeight in availableObstacleWeights)
         {
             if (randomValue < obstacleWeight.Value)
             {
@@ -116,10 +140,28 @@ public class ObstacleManager : ObjectPool
         return spawnLocation;
     }
 
+    private Quaternion RandomizeObstacleRotation()
+    {
+        float snapAngle = 45.0f;
+        float z = Mathf.Round(Random.Range(0f, 360f) / snapAngle) * snapAngle;
+        return Quaternion.Euler(0, 0, z);
+    }
+
+    private float RandomizeObstacleYScale()
+    {
+        int randomScale = Random.Range(0, obstacleScales.Count - 1);
+        return obstacleScales[randomScale];
+    }
+
     private void SpawnNormalObstacle()
     {
-        GetValidObjectInPool(ObstacleTags.NormalObstacle)
-            .transform.position = RandomizedSpawnLocation();
+        GameObject validObject = GetValidObjectInPool(ObstacleTags.NormalObstacle);
+        validObject.transform.position = RandomizedSpawnLocation();
+        validObject.transform.rotation = RandomizeObstacleRotation();
+        validObject.transform.localScale = new Vector3(
+            validObject.transform.localScale.x,
+            RandomizeObstacleYScale(),
+            validObject.transform.localScale.z);
     }
 
     private void SpawnRotatingObstacle()
