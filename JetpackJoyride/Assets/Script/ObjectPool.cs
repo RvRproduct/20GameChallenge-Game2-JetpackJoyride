@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
@@ -8,7 +7,7 @@ public class ObjectPool : MonoBehaviour
     [System.Serializable]
     public struct ObjectPoolPair
     {
-        public string poolTag;
+        [HideInInspector] public string poolTag;
         public int MAXPOOLSIZE;
         public GameObject objectToPool;
     }
@@ -26,12 +25,18 @@ public class ObjectPool : MonoBehaviour
     {
         foreach (ObjectPoolPair objectPoolPair in objectPoolPairs)
         {
-            objectPool.Add(objectPoolPair.poolTag, new List<GameObject>());
-
             for (int obj = 0; obj < objectPoolPair.MAXPOOLSIZE; obj++)
             {
-                objectPool[objectPoolPair.poolTag]
-                    .Add(Instantiate(objectPoolPair.objectToPool, gameObject.transform));
+                
+                GameObject currentPoolObject =  
+                    (Instantiate(objectPoolPair.objectToPool, gameObject.transform));
+
+                BasePoolObject poolObjectBase = currentPoolObject.GetComponent<BasePoolObject>();
+                if (!objectPool.ContainsKey(poolObjectBase.poolTag))
+                {
+                    objectPool.Add(poolObjectBase.poolTag, new List<GameObject>());
+                }
+                objectPool[objectPoolPair.poolTag].Add(currentPoolObject);
                 objectPool[objectPoolPair.poolTag][obj].SetActive(false);
             }
         }   

@@ -2,10 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotatingObstacle : BaseObstacle, IObstacle
+public class RotatingObstacle : BasePoolObject, IObstacle
 {
     [SerializeField] private float speed = 8.0f;
     [SerializeField] private float rotationSpeed = 10.0f;
+
+    protected override string ProvidePoolTag()
+    {
+        return PoolTags.ObstacleTags.RotatingObstacle;
+    }
+
+    protected override string ProvidePoolReturnTag()
+    {
+        return PoolTags.ObstacleReturnTags.ObstacleReturn;
+    }
 
     private void Update()
     {

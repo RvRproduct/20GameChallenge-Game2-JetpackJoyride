@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyObstacle : BaseObstacle, IObstacle
+public class EnemyObstacle : BasePoolObject, IObstacle
 {
     [SerializeField] private float speed = 5.0f;
     [SerializeField] private float forceMaxAmount = 600.0f;
@@ -13,8 +13,20 @@ public class EnemyObstacle : BaseObstacle, IObstacle
     private Rigidbody2D rb;
     private bool onFloor = false;
 
-    private void Awake()
+    protected override string ProvidePoolTag()
     {
+        return PoolTags.ObstacleTags.EnemyObstacle;
+    }
+
+    protected override string ProvidePoolReturnTag()
+    {
+        return PoolTags.ObstacleReturnTags.ObstacleReturn;
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
         rb = GetComponent<Rigidbody2D>();
         RandomJumpValue();
     }
