@@ -1,0 +1,34 @@
+{
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "0dffb103-05ea-46fe-aa66-cb6c863c476c",
+            "actions": [
+                {
+                    "name": "Jetpack",
+                    "type": "Button",
+                    "id": "781189f0-7a82-4c0e-9dee-ef95fa9fd075",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b0167f8b-5ebb-4297-b8f5-1f9cca84d037",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jetpack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
