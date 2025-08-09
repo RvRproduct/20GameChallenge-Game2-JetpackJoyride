@@ -285,21 +285,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 963979967}
     - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
+      propertyPath: maxSpawnRateTime
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
       propertyPath: objectPoolPairs.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
       propertyPath: objectPoolPairs.Array.data[0].poolTag
       value: NormalObstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
+      propertyPath: objectPoolPairs.Array.data[1].poolTag
+      value: RotatingObstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
+      propertyPath: objectPoolPairs.Array.data[2].poolTag
+      value: EnemyObstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
       propertyPath: objectPoolPairs.Array.data[0].MAXPOOLSIZE
-      value: 6
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
+      propertyPath: objectPoolPairs.Array.data[1].MAXPOOLSIZE
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
+      propertyPath: objectPoolPairs.Array.data[2].MAXPOOLSIZE
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
       propertyPath: objectPoolPairs.Array.data[0].objectToPool
       value: 
       objectReference: {fileID: 4157470880952795008, guid: 03d2df6885664b041b01dbb764e01165, type: 3}
+    - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
+      propertyPath: objectPoolPairs.Array.data[1].objectToPool
+      value: 
+      objectReference: {fileID: 6389786822656734879, guid: 3e40c598386960c4c9eaa1d45b2efa92, type: 3}
+    - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
+      propertyPath: objectPoolPairs.Array.data[2].objectToPool
+      value: 
+      objectReference: {fileID: 3197835509471834858, guid: 8125acbe2ab7a9d4386df578a0c47086, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -471,6 +499,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7461163834236225545, guid: df7285bb225ad094cbb5a961aafd10c7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -484,6 +516,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8523711793690026414, guid: bc2eaeeca35c97946bb4e338a98c7a61, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8523711793690026414, guid: bc2eaeeca35c97946bb4e338a98c7a61, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -526,6 +562,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8615362075310290428, guid: bc2eaeeca35c97946bb4e338a98c7a61, type: 3}
       propertyPath: m_Name
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615362075310290428, guid: bc2eaeeca35c97946bb4e338a98c7a61, type: 3}
+      propertyPath: m_TagString
       value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []

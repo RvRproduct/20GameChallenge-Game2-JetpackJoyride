@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NormalObstacle : BaseObstacle, IObstacle
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float speed = 8.0f;
 
     private void Update()
     {

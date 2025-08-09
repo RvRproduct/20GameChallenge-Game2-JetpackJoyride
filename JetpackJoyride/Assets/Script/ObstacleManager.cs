@@ -153,9 +153,8 @@ public class ObstacleManager : ObjectPool
         return obstacleScales[randomScale];
     }
 
-    private void SpawnNormalObstacle()
+    private void TransformObstacle(GameObject validObject)
     {
-        GameObject validObject = GetValidObjectInPool(ObstacleTags.NormalObstacle);
         validObject.transform.position = RandomizedSpawnLocation();
         validObject.transform.rotation = RandomizeObstacleRotation();
         validObject.transform.localScale = new Vector3(
@@ -164,14 +163,23 @@ public class ObstacleManager : ObjectPool
             validObject.transform.localScale.z);
     }
 
+    private void SpawnNormalObstacle()
+    {
+        GameObject validObject = GetValidObjectInPool(ObstacleTags.NormalObstacle);
+        TransformObstacle(validObject);
+        
+    }
+
     private void SpawnRotatingObstacle()
     {
-
+        GameObject validObject = GetValidObjectInPool(ObstacleTags.RotatingObstacle);
+        TransformObstacle(validObject);
     }
 
     private void SpawnEnemyObstacle()
     {
-
+        GameObject validObject = GetValidObjectInPool(ObstacleTags.EnemyObstacle);
+        validObject.transform.position = RandomizedSpawnLocation();
     }
 
 }
