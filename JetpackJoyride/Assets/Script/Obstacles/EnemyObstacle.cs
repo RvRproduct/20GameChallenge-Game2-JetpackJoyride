@@ -84,7 +84,6 @@ public class EnemyObstacle : BasePoolObject, IObstacle
     {
         if (collision.gameObject.tag == "Floor")
         {
-            Debug.Log("On FLOOR");
             SetOnFloor(true);
             SetIsFalling(false);
             SetIsJumping(false);
