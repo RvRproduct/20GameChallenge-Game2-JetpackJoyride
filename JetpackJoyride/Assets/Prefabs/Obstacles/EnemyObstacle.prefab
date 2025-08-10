@@ -177,6 +177,7 @@ MonoBehaviour:
   speed: 5
   forceMaxAmount: 600
   maxJumpTime: 2
+  animator: {fileID: 3594935868618518757}
 --- !u!95 &3594935868618518757
 Animator:
   serializedVersion: 5
