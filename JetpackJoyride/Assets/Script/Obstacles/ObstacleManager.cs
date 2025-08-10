@@ -147,20 +147,17 @@ public class ObstacleManager : ObjectPool
         return Quaternion.Euler(0, 0, z);
     }
 
-    private float RandomizeObstacleYScale()
+
+    public List<float> GetObstacleScales()
     {
-        int randomScale = Random.Range(0, obstacleScales.Count - 1);
-        return obstacleScales[randomScale];
+        return obstacleScales;
     }
 
     private void TransformObstacle(GameObject validObject)
     {
         validObject.transform.position = RandomizedSpawnLocation();
         validObject.transform.rotation = RandomizeObstacleRotation();
-        validObject.transform.localScale = new Vector3(
-            validObject.transform.localScale.x,
-            RandomizeObstacleYScale(),
-            validObject.transform.localScale.z);
+        // We are changing the scale values on the object's script themselves
     }
 
     private void SpawnNormalObstacle()
