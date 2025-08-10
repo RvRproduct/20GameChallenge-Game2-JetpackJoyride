@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] private float accerleration = 10f;
     [SerializeField] private float maxSpeed = 5.0f;
-    [SerializeField] private Sprite jumpSprite;
-    [SerializeField] private Sprite fallSprite;
     private SpriteRenderer spriteRenderer;
     private bool isUsingJetpack = false;
 
@@ -63,7 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         if (spriteRenderer != null)
         {
-            spriteRenderer.sprite = jumpSprite;
+            PlayerAnimationManager.Instance.TryTriggerJump();
         }
         
         isUsingJetpack = true;
@@ -73,7 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         if (spriteRenderer != null)
         {
-            spriteRenderer.sprite = fallSprite;
+            PlayerAnimationManager.Instance.TryTriggerFall();
         }
         
         isUsingJetpack = false;

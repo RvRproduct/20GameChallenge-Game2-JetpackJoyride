@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5892515239634511490}
   - component: {fileID: 1293034615965160584}
   - component: {fileID: 591117639523973042}
+  - component: {fileID: 781483403885392604}
   m_Layer: 0
   m_Name: ProjectileGem
   m_TagString: Untagged
@@ -162,3 +163,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.03}
   serializedVersion: 2
   m_Radius: 0.3
+--- !u!95 &781483403885392604
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2914358213536165017}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0e506d15fd89c5f4d9b60f93c9197d52, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
