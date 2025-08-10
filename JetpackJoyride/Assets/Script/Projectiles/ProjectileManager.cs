@@ -14,6 +14,9 @@ public class ProjectileManager : ObjectPool
     [SerializeField] private float maxSpawnRateTime = 0.25f;
     private float currentSpawnRateTime;
 
+    [Header("Player Controller")]
+    [SerializeField] private PlayerController playerController;
+
     protected override void Awake()
     {
         if (Instance == null)
@@ -51,5 +54,10 @@ public class ProjectileManager : ObjectPool
             currentSpawnRateTime = 0.0f;
         }
         
+    }
+
+    public PlayerController GetPlayerController()
+    {
+        return playerController;
     }
 }

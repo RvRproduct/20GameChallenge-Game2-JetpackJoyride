@@ -11,8 +11,10 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] private float accerleration = 10f;
     [SerializeField] private float maxSpeed = 5.0f;
+    [SerializeField] private GameObject shieldObject;
     private SpriteRenderer spriteRenderer;
     private bool isUsingJetpack = false;
+    private bool hasShield = false;
 
     private void Awake()
     {
@@ -79,9 +81,19 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if (collision.gameObject.GetComponent<IObstacle>() != null)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (!hasShield)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            else
+            {
+                collision.gameObject.SetActive(false);
+                shieldObject.SetActive(false);
+                hasShield = false;
+            }
         }
     }
 
@@ -89,7 +101,27 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<IObstacle>() != null)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (!hasShield)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            else
+            {
+                collision.gameObject.SetActive(false);
+                shieldObject.SetActive(false);
+                hasShield = false;
+            }
         }
+    }
+
+    public void ActivateShield()
+    {
+        hasShield = true;
+        shieldObject.SetActive(true);
+    }
+
+    public bool IsShieldActive()
+    {
+        return hasShield;
     }
 }
