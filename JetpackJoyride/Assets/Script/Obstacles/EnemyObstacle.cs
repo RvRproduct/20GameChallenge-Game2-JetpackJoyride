@@ -12,6 +12,9 @@ public class EnemyObstacle : BasePoolObject, IObstacle
     private float forceMinAmount = 100.0f;
     private Rigidbody2D rb;
     private bool onFloor = false;
+    private BoxCollider2D boxCollider2D;
+    private ParticleSystem deathParticleSystem;
+    private SpriteRenderer spriteRenderer;
 
     protected override string ProvidePoolTag()
     {
@@ -28,7 +31,16 @@ public class EnemyObstacle : BasePoolObject, IObstacle
         base.Awake();
 
         rb = GetComponent<Rigidbody2D>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
+        deathParticleSystem = GetComponent<ParticleSystem>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         RandomJumpValue();
+    }
+
+    private void OnEnable()
+    {
+        boxCollider2D.enabled = true;
+        spriteRenderer.enabled = true;
     }
 
     private void Update()
@@ -77,8 +89,46 @@ public class EnemyObstacle : BasePoolObject, IObstacle
                     RandomJumpValue();
                 }
             }
-        }
-        
-        
+        }  
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+
+        BasePoolObjectTrigger(collision);
+
+        if (collision.gameObject.tag == "Projectile")
+        {
+            if (!ProjectileManager.Instance.GetPlayerController().IsShieldActive())
+            {
+                ProjectileManager.Instance.GetPlayerController().ActivateShield();
+            }
+
+            // Return Objects To Pool
+            collision.gameObject.SetActive(false);
+            boxCollider2D.enabled = false;
+            spriteRenderer.enabled = false;
+            deathParticleSystem.Play();
+            StartCoroutine(OnDeath());
+        }
+    }
+
+    private IEnumerator PlayDeathParticle()
+    {
+        while (deathParticleSystem.IsAlive())
+        {
+            yield return null;
+        }
+        yield break;
+    }
+
+    private IEnumerator OnDeath()
+    {
+        yield return StartCoroutine(PlayDeathParticle());
+
+        gameObject.SetActive(false);
+    }
+
+
+
 }

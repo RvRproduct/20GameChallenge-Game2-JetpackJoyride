@@ -55,6 +55,11 @@ public class PlayerAnimationManager : MonoBehaviour
         animator.SetBool("OnFloor", _onFloor);
     }
 
+    public bool GetOnFloor()
+    {
+        return animator.GetBool("OnFloor");
+    }
+
     public void SetIsHurting(bool _isHurting)
     {
         animator.SetBool("IsHurting", _isHurting);

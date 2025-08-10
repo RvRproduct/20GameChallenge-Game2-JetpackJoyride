@@ -13,6 +13,18 @@ public class PlayerFloorCheck : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            if (!PlayerAnimationManager.Instance.GetOnFloor())
+            {
+                PlayerAnimationManager.Instance.SetOnFloor(true);
+            }
+
+        }
+    }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Floor")

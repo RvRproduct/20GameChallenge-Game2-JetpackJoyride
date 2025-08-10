@@ -41,11 +41,16 @@ public abstract class BasePoolObject : MonoBehaviour
         poolReturnTag = _poolReturnTag;
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected void BasePoolObjectTrigger(Collider2D collision)
     {
         if (collision.gameObject.tag == poolReturnTag)
         {
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        BasePoolObjectTrigger(collision);
     }
 }

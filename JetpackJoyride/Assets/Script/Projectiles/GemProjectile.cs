@@ -19,21 +19,4 @@ public class GemProjectile : BasePoolObject
     {
         transform.position += Vector3.down * speed * Time.deltaTime;
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-
-
-        if (collision.gameObject.tag == "Enemy")
-        {
-            if (!ProjectileManager.Instance.GetPlayerController().IsShieldActive())
-            {
-                ProjectileManager.Instance.GetPlayerController().ActivateShield();
-            }
-
-            // Return Objects To Pool
-            collision.gameObject.SetActive(false);
-            gameObject.SetActive(false);
-        }
-    }
 }

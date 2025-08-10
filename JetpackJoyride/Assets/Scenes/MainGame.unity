@@ -322,15 +322,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
       propertyPath: objectPoolPairs.Array.data[0].MAXPOOLSIZE
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
       propertyPath: objectPoolPairs.Array.data[1].MAXPOOLSIZE
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
       propertyPath: objectPoolPairs.Array.data[2].MAXPOOLSIZE
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6345505873913956640, guid: 19bd71b2c29a79c4a91d3122baf3fda1, type: 3}
       propertyPath: objectPoolPairs.Array.data[0].objectToPool
@@ -676,12 +676,16 @@ PrefabInstance:
       objectReference: {fileID: 1795924358076956753}
     - target: {fileID: 5352163805871632472, guid: 3b48d006c110b594f9293cac0ec113d2, type: 3}
       propertyPath: maxSpawnRateTime
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5352163805871632472, guid: 3b48d006c110b594f9293cac0ec113d2, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1235101155}
+    - target: {fileID: 5352163805871632472, guid: 3b48d006c110b594f9293cac0ec113d2, type: 3}
+      propertyPath: objectPoolPairs.Array.data[0].MAXPOOLSIZE
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6722816195866870700, guid: 3b48d006c110b594f9293cac0ec113d2, type: 3}
       propertyPath: m_Name
       value: ProjectileManager
@@ -765,12 +769,16 @@ PrefabInstance:
       value: ObstaclePoolReturn
       objectReference: {fileID: 0}
     - target: {fileID: 5080022846866223270, guid: 83495ef7beed48747858904b2b8d0d38, type: 3}
+      propertyPath: m_Size.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080022846866223270, guid: 83495ef7beed48747858904b2b8d0d38, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7616856315745124058, guid: 83495ef7beed48747858904b2b8d0d38, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15
+      value: -15.5
       objectReference: {fileID: 0}
     - target: {fileID: 7616856315745124058, guid: 83495ef7beed48747858904b2b8d0d38, type: 3}
       propertyPath: m_LocalPosition.y
