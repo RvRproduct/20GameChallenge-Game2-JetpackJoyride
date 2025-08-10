@@ -9,6 +9,15 @@ public class PlayerFloorCheck : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             PlayerAnimationManager.Instance.TryTriggerRun();
+            PlayerAnimationManager.Instance.SetOnFloor(true);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            PlayerAnimationManager.Instance.SetOnFloor(false);
         }
     }
 }

@@ -34,4 +34,30 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         animator.SetTrigger("Fall");
     }
+
+    public void TryTriggerHurt()
+    {
+        animator.SetTrigger("Hurt");
+    }
+
+    public void TryTriggerDeath()
+    {
+        animator.SetTrigger("Death");
+    }
+
+    public void SetIsJumping(bool _isJumping)
+    {
+        animator.SetBool("IsJumping", _isJumping);
+    }
+
+    public void SetOnFloor(bool _onFloor)
+    {
+        animator.SetBool("OnFloor", _onFloor);
+    }
+
+    public void SetIsHurting(bool _isHurting)
+    {
+        animator.SetBool("IsHurting", _isHurting);
+    }
+
 }

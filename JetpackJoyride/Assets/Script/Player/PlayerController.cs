@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
         if (spriteRenderer != null)
         {
             PlayerAnimationManager.Instance.TryTriggerJump();
+            PlayerAnimationManager.Instance.SetIsJumping(true);
         }
         
         isUsingJetpack = true;
@@ -74,6 +75,7 @@ public class PlayerController : MonoBehaviour
         if (spriteRenderer != null)
         {
             PlayerAnimationManager.Instance.TryTriggerFall();
+            PlayerAnimationManager.Instance.SetIsJumping(false);
         }
         
         isUsingJetpack = false;
@@ -86,10 +88,13 @@ public class PlayerController : MonoBehaviour
         {
             if (!hasShield)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                PlayerAnimationManager.Instance.TryTriggerDeath();
+               // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             else
             {
+                PlayerAnimationManager.Instance.SetIsHurting(true);
+                PlayerAnimationManager.Instance.TryTriggerHurt();
                 collision.gameObject.SetActive(false);
                 shieldObject.SetActive(false);
                 hasShield = false;
@@ -103,10 +108,13 @@ public class PlayerController : MonoBehaviour
         {
             if (!hasShield)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                PlayerAnimationManager.Instance.TryTriggerDeath();
+               // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             else
             {
+                PlayerAnimationManager.Instance.SetIsHurting(true);
+                PlayerAnimationManager.Instance.TryTriggerHurt();
                 collision.gameObject.SetActive(false);
                 shieldObject.SetActive(false);
                 hasShield = false;
@@ -123,5 +131,10 @@ public class PlayerController : MonoBehaviour
     public bool IsShieldActive()
     {
         return hasShield;
+    }
+
+    public void StopHurting()
+    {
+        PlayerAnimationManager.Instance.SetIsHurting(false);
     }
 }
