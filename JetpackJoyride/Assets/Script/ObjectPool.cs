@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ObjectPool : MonoBehaviour
 {
     [System.Serializable]
-    public struct ObjectPoolPair
+    public class ObjectPoolPair
     {
         [HideInInspector] public string poolTag;
         public int MAXPOOLSIZE;
@@ -26,8 +27,7 @@ public class ObjectPool : MonoBehaviour
         foreach (ObjectPoolPair objectPoolPair in objectPoolPairs)
         {
             for (int obj = 0; obj < objectPoolPair.MAXPOOLSIZE; obj++)
-            {
-                
+            {    
                 GameObject currentPoolObject =  
                     (Instantiate(objectPoolPair.objectToPool, gameObject.transform));
 
@@ -35,7 +35,9 @@ public class ObjectPool : MonoBehaviour
                 if (!objectPool.ContainsKey(poolObjectBase.poolTag))
                 {
                     objectPool.Add(poolObjectBase.poolTag, new List<GameObject>());
+                    objectPoolPair.poolTag = poolObjectBase.poolTag;
                 }
+
                 objectPool[objectPoolPair.poolTag].Add(currentPoolObject);
                 objectPool[objectPoolPair.poolTag][obj].SetActive(false);
             }
@@ -55,7 +57,7 @@ public class ObjectPool : MonoBehaviour
             {
                 obj.SetActive(true);
                 return obj;
-            }
+            }         
         }
 
         return null;

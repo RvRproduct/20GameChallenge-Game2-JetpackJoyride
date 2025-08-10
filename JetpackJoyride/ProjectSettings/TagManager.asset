@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ObstaclePoolReturn
   - Floor
+  - ProjectilePoolReturn
   layers:
   - Default
   - TransparentFX

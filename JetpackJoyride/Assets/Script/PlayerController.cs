@@ -11,15 +11,29 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] private float accerleration = 10f;
     [SerializeField] private float maxSpeed = 5.0f;
+    [SerializeField] private Sprite jumpSprite;
+    [SerializeField] private Sprite fallSprite;
+    private SpriteRenderer spriteRenderer;
     private bool isUsingJetpack = false;
 
     private void Awake()
     {
         inputActions = new InputActions();
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         inputActions.Enable();
+    }
+
+    private void OnEnable()
+    {
         inputActions.Player.Jetpack.started += IsUsingJetpack;
         inputActions.Player.Jetpack.canceled += IsNotUsingJetpack;
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Player.Jetpack.started -= IsUsingJetpack;
+        inputActions.Player.Jetpack.canceled -= IsNotUsingJetpack;
     }
 
     private void FixedUpdate()
@@ -31,6 +45,8 @@ public class PlayerController : MonoBehaviour
     {
         if (isUsingJetpack)
         {
+            ProjectileManager.Instance.SpawnGemProjectileInWorld();
+
             if (rb.velocity.magnitude < maxSpeed)
             {
                 rb.AddForce(Vector2.up * accerleration * rb.mass, ForceMode2D.Force);
@@ -45,11 +61,21 @@ public class PlayerController : MonoBehaviour
 
     private void IsUsingJetpack(InputAction.CallbackContext context)
     {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = jumpSprite;
+        }
+        
         isUsingJetpack = true;
     }
 
     private void IsNotUsingJetpack(InputAction.CallbackContext context)
     {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = fallSprite;
+        }
+        
         isUsingJetpack = false;
     }
 
