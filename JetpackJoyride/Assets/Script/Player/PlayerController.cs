@@ -137,4 +137,9 @@ public class PlayerController : MonoBehaviour
     {
         PlayerAnimationManager.Instance.SetIsHurting(false);
     }
+
+    public void OnDeath()
+    {
+        gameObject.SetActive(false);
+    }
 }
