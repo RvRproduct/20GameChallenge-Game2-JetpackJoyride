@@ -48,7 +48,7 @@ public class NormalObstacle : BasePoolObject, IObstacle
 
     private float RandomizeObstacleYScale()
     {
-        int randomScale = Random.Range(0, ObstacleManager.Instance.GetObstacleScales().Count - 1);
+        int randomScale = Random.Range(0, ObstacleManager.Instance.GetObstacleScales().Count);
         return ObstacleManager.Instance.GetObstacleScales()[randomScale];
     }
 }

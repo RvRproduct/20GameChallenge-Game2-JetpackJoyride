@@ -25,8 +25,7 @@ public class ObstacleManager : ObjectPool
         new List<float>
         {
             { 2.0f },
-            { 4.0f },
-            { 6.0f }
+            { 4.0f }
         };
 
 
