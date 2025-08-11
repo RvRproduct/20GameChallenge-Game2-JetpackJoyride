@@ -15,8 +15,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource audioSourceSoundEffectsA;
     [SerializeField] private AudioSource audioSourceSoundEffectsB;
     private Coroutine running;
-    private bool isMusicMuted = false;
-    private bool isSoundEffectsMuted = false;
     private int currentMusic = 0;
 
     private void Awake()
@@ -44,7 +42,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySoundEffect(AudioClip _soundEffect)
     {
-        if (!isSoundEffectsMuted)
+        if (!GameManager.Instance.GetIsSoundEffectsMuted())
         {
             if (audioSourceSoundEffectsA.isPlaying)
             {
@@ -57,11 +55,19 @@ public class SoundManager : MonoBehaviour
                 audioSourceSoundEffectsA.Play();
             }
         }
+        else
+        {
+            if (audioSourceSoundEffectsA.isPlaying)
+            {
+                audioSourceSoundEffectsB.Stop();
+                audioSourceSoundEffectsA.Stop();
+            }   
+        }
     }
 
     private IEnumerator PlayMusicTracks()
     {
-        if (!isMusicMuted)
+        if (!GameManager.Instance.GetIsMusicMuted())
         {
             if (randomAllMusic.Count - 1 < currentMusic )
             {
@@ -82,6 +88,11 @@ public class SoundManager : MonoBehaviour
 
         while (audioSourceMusic.isPlaying)
         {
+            if (GameManager.Instance.GetIsMusicMuted())
+            {
+                audioSourceMusic.Stop();
+            }
+
             yield return null;
         }
 
