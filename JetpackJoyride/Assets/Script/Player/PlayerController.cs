@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isUsingJetpack = false;
     private bool hasShield = false;
+    private BoxCollider2D boxCollider2D;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip poofSound;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
         inputActions = new InputActions();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
+        boxCollider2D.enabled = false;
         inputActions.Enable();
     }
 
@@ -37,6 +40,11 @@ public class PlayerController : MonoBehaviour
     {
         inputActions.Player.Jetpack.started -= IsUsingJetpack;
         inputActions.Player.Jetpack.canceled -= IsNotUsingJetpack;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(WaitForObstacles());
     }
 
     private void FixedUpdate()
@@ -87,7 +95,8 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        if (collision.gameObject.GetComponent<IObstacle>() != null)
+        if (collision.gameObject.GetComponent<IObstacle>() != null
+            && GameManager.Instance.GetObstacleStart())
         {
             if (!hasShield && !PlayerAnimationManager.Instance.GetIsHurting())
             {
@@ -109,7 +118,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<IObstacle>() != null)
+        if (collision.gameObject.GetComponent<IObstacle>() != null
+            && GameManager.Instance.GetObstacleStart())
         {
             if (!hasShield && !PlayerAnimationManager.Instance.GetIsHurting())
             {
@@ -148,5 +158,15 @@ public class PlayerController : MonoBehaviour
     public void OnDeath()
     {
         gameObject.SetActive(false);
+    }
+
+    private IEnumerator WaitForObstacles()
+    {
+        while (!GameManager.Instance.GetObstacleStart())
+        {
+            yield return null; 
+        }
+
+        boxCollider2D.enabled = true;
     }
 }

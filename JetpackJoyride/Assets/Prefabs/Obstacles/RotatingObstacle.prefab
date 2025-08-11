@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3280547487845000214}
   - component: {fileID: 2675019996836286218}
   - component: {fileID: 6091842221360890790}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RotatingObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private float countingSeconds;
     private int currentSecondsAchieved;
     private bool startGame = false;
+    private bool obstacleStart = false;
 
     // Use This To Start A New Game
     InputActions inputActions;
@@ -53,12 +54,6 @@ public class GameManager : MonoBehaviour
         inputActions.Game.StartGame.started -= StartGame;
     }
 
-    private void StartGame(InputAction.CallbackContext context)
-    {
-        startGame = true;
-        inputActions.Game.StartGame.started -= StartGame;
-    }
-
     private void Update()
     {
         GameTimer();
@@ -97,6 +92,30 @@ public class GameManager : MonoBehaviour
     public void ReadyStartInput()
     {
         inputActions.Game.StartGame.started += StartGame;
+    }
+
+    private void StartGame(InputAction.CallbackContext context)
+    {
+        inputActions.Game.StartGame.started -= StartGame;
+        startGame = true;
+        StartCoroutine(ObstacleStart());
+    }
+
+    private IEnumerator ObstacleStart()
+    {
+        Debug.Log("Calling????");
+        yield return new WaitForSeconds(2.0f);
+        obstacleStart = true;
+    }
+
+    public bool GetObstacleStart()
+    {
+        return obstacleStart;
+    }
+
+    public void SetObstacleStart(bool _obstaclestart)
+    {
+        obstacleStart = _obstaclestart;
     }
 
     public bool GetIsMusicMuted()
