@@ -177,6 +177,7 @@ MonoBehaviour:
   speed: 5
   forceMaxAmount: 600
   maxJumpTime: 2
+  squishSound: {fileID: 8300000, guid: d6a5ded30b3d2bd4195c4c04dd4c4bc1, type: 3}
 --- !u!95 &3594935868618518757
 Animator:
   serializedVersion: 5
@@ -4962,7 +4963,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0

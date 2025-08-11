@@ -209,6 +209,8 @@ MonoBehaviour:
   accerleration: 30
   maxSpeed: 9
   shieldObject: {fileID: 6816179800604052004}
+  poofSound: {fileID: 8300000, guid: 8af1040ef58252d40bad8c199d436e37, type: 3}
+  hurtSound: {fileID: 8300000, guid: 4e4f89dcd230def4c82f816a2249949e, type: 3}
 --- !u!95 &5178408144938225316
 Animator:
   serializedVersion: 5

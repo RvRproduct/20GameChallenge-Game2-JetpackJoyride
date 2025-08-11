@@ -6,13 +6,17 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
+    [Header("Music")]
     [SerializeField] private List<AudioClip> allMusic;
     private List<AudioClip> randomAllMusic = new List<AudioClip>();
 
+    [Header("Audio Sources")]
     [SerializeField] private AudioSource audioSourceMusic;
-    [SerializeField] private AudioSource audioSourceSoundEffects;
+    [SerializeField] private AudioSource audioSourceSoundEffectsA;
+    [SerializeField] private AudioSource audioSourceSoundEffectsB;
     private Coroutine running;
     private bool isMusicMuted = false;
+    private bool isSoundEffectsMuted = false;
     private int currentMusic = 0;
 
     private void Awake()
@@ -35,6 +39,23 @@ public class SoundManager : MonoBehaviour
         if (running == null)
         {
             running = StartCoroutine(PlayMusicTracks());
+        }
+    }
+
+    public void PlaySoundEffect(AudioClip _soundEffect)
+    {
+        if (!isSoundEffectsMuted)
+        {
+            if (audioSourceSoundEffectsA.isPlaying)
+            {
+                audioSourceSoundEffectsB.clip = _soundEffect;
+                audioSourceSoundEffectsB.Play();
+            }
+            else
+            {
+                audioSourceSoundEffectsA.clip = _soundEffect;
+                audioSourceSoundEffectsA.Play();
+            }
         }
     }
 

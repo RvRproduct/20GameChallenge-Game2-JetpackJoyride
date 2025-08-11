@@ -18,6 +18,9 @@ public class EnemyObstacle : BasePoolObject, IObstacle
     [Header("Animation")]
     private Animator animator;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip squishSound;
+
     protected override string ProvidePoolTag()
     {
         return PoolTags.ObstacleTags.EnemyObstacle;
@@ -143,6 +146,8 @@ public class EnemyObstacle : BasePoolObject, IObstacle
             collision.gameObject.SetActive(false);
             boxCollider2D.enabled = false;
             spriteRenderer.enabled = false;
+            // Play Sound Effect
+            SoundManager.Instance.PlaySoundEffect(squishSound);
             deathParticleSystem.Play();
             StartCoroutine(OnDeath());
         }

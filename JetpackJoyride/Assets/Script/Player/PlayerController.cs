@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     private bool isUsingJetpack = false;
     private bool hasShield = false;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip poofSound;
+    [SerializeField] private AudioClip hurtSound;
+
     private void Awake()
     {
         inputActions = new InputActions();
@@ -87,11 +91,13 @@ public class PlayerController : MonoBehaviour
         {
             if (!hasShield && !PlayerAnimationManager.Instance.GetIsHurting())
             {
+                SoundManager.Instance.PlaySoundEffect(poofSound);
                 PlayerAnimationManager.Instance.TryTriggerDeath();
             }
             else
             {
                 PlayerAnimationManager.Instance.SetIsHurting(true);
+                SoundManager.Instance.PlaySoundEffect(hurtSound);
                 PlayerAnimationManager.Instance.TryTriggerHurt();
                 shieldObject.SetActive(false);
                 hasShield = false;
@@ -107,11 +113,13 @@ public class PlayerController : MonoBehaviour
         {
             if (!hasShield && !PlayerAnimationManager.Instance.GetIsHurting())
             {
+                SoundManager.Instance.PlaySoundEffect(poofSound);
                 PlayerAnimationManager.Instance.TryTriggerDeath();
             }
             else
             {
                 PlayerAnimationManager.Instance.SetIsHurting(true);
+                SoundManager.Instance.PlaySoundEffect(hurtSound);
                 PlayerAnimationManager.Instance.TryTriggerHurt();
                 shieldObject.SetActive(false);
                 hasShield = false;
