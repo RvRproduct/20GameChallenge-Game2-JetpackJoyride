@@ -154,7 +154,6 @@ public class EnemyObstacle : BasePoolObject, IObstacle
         {
             yield return null;
         }
-        yield break;
     }
 
     private IEnumerator OnDeath()

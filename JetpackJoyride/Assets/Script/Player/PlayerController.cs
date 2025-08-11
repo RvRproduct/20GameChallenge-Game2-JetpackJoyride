@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -86,19 +85,19 @@ public class PlayerController : MonoBehaviour
         
         if (collision.gameObject.GetComponent<IObstacle>() != null)
         {
-            if (!hasShield)
+            if (!hasShield && !PlayerAnimationManager.Instance.GetIsHurting())
             {
                 PlayerAnimationManager.Instance.TryTriggerDeath();
-               // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             else
             {
                 PlayerAnimationManager.Instance.SetIsHurting(true);
                 PlayerAnimationManager.Instance.TryTriggerHurt();
-                collision.gameObject.SetActive(false);
                 shieldObject.SetActive(false);
                 hasShield = false;
             }
+
+            collision.gameObject.SetActive(false);
         }
     }
 
@@ -106,19 +105,19 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<IObstacle>() != null)
         {
-            if (!hasShield)
+            if (!hasShield && !PlayerAnimationManager.Instance.GetIsHurting())
             {
                 PlayerAnimationManager.Instance.TryTriggerDeath();
-               // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             else
             {
                 PlayerAnimationManager.Instance.SetIsHurting(true);
                 PlayerAnimationManager.Instance.TryTriggerHurt();
-                collision.gameObject.SetActive(false);
                 shieldObject.SetActive(false);
                 hasShield = false;
             }
+
+            collision.gameObject.SetActive(false);
         }
     }
 

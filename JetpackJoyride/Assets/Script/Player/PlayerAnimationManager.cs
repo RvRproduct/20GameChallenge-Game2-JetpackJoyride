@@ -65,4 +65,9 @@ public class PlayerAnimationManager : MonoBehaviour
         animator.SetBool("IsHurting", _isHurting);
     }
 
+    public bool GetIsHurting()
+    {
+        return animator.GetBool("IsHurting");
+    }
+
 }

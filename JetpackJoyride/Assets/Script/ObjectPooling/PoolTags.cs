@@ -22,4 +22,19 @@ namespace PoolTags
     {
         public const string GemProjectile = "GemProjectile";
     }
+
+    public struct BackgroundReturnTags
+    {
+        public const string BackgroundReturn = "BackgroundPoolReturn";
+    }
+
+    public struct BackgroundTags
+    {
+        public const string OceanBackground = "OceanBackground";
+    }
+
+    public struct BackgroundSpawnTags
+    {
+        public const string BackgroundSpawn = "BackgroundSpawn";
+    }
 }

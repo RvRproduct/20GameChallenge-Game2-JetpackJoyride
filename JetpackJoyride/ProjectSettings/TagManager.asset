@@ -9,6 +9,8 @@ TagManager:
   - ProjectilePoolReturn
   - Enemy
   - Projectile
+  - BackgroundPoolReturn
+  - BackgroundSpawn
   layers:
   - Default
   - TransparentFX
