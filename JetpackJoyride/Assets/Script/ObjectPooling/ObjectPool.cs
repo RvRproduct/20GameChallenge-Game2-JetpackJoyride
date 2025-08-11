@@ -31,6 +31,7 @@ public class ObjectPool : MonoBehaviour
                     (Instantiate(objectPoolPair.objectToPool, gameObject.transform));
 
                 BasePoolObject poolObjectBase = currentPoolObject.GetComponent<BasePoolObject>();
+
                 if (!objectPool.ContainsKey(poolObjectBase.poolTag))
                 {
                     objectPool.Add(poolObjectBase.poolTag, new List<GameObject>());

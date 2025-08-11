@@ -8,7 +8,7 @@ public class ObstacleManager : ObjectPool
     public static ObstacleManager Instance;
 
     [Header("Obstacle Spawn Weights")]
-    private static readonly Dictionary<string, float> obstacleWeights =
+    private readonly Dictionary<string, float> obstacleWeights =
         new Dictionary<string, float>
         {
             { ObstacleTags.NormalObstacle, 0.75f },
@@ -19,7 +19,7 @@ public class ObstacleManager : ObjectPool
     private Dictionary<string, float> availableObstacleWeights;
 
     [Header("Obstacle Scale Values")]
-    private static readonly List<float> obstacleScales =
+    private readonly List<float> obstacleScales =
         new List<float>
         {
             { 2.0f },
@@ -48,19 +48,32 @@ public class ObstacleManager : ObjectPool
         }
 
         base.Awake();
-
-        SetUpObstacleWeights();
     }
 
     private void Start()
     {
         SetUpObjectPool();
+        SetUpObstacleWeights();
         SpawnObstacleInWorld();
     }
 
     private void Update()
     {
-        SpawnTimer();
+        if (GameManager.Instance.GetObstacleStart())
+        {
+            SpawnTimer();
+        }    
+    }
+
+    public void ReturnAllObstaclesToPool()
+    {
+        foreach (KeyValuePair<string, List<GameObject>> poolObjects in objectPool)
+        {
+            foreach (GameObject poolObject in poolObjects.Value)
+            {
+                poolObject.SetActive(false);
+            }
+        }
     }
 
     private void SetUpObstacleWeights()

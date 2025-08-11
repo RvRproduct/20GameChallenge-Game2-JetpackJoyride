@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
+    [Header("Sound")]
     [SerializeField] private Sprite unMuted;
     [SerializeField] private Sprite muted;
     private Button button;
-
     private Image audioImage;
 
     private void Awake()

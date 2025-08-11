@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.SetBestTimeOnStart();
         StartCoroutine(WaitForObstacles());
     }
 
@@ -96,44 +98,63 @@ public class PlayerController : MonoBehaviour
     {
         
         if (collision.gameObject.GetComponent<IObstacle>() != null
-            && GameManager.Instance.GetObstacleStart())
+            && GameManager.Instance.GetObstacleStart()
+            && GameManager.Instance.GetStartGame())
         {
             if (!hasShield && !PlayerAnimationManager.Instance.GetIsHurting())
             {
                 SoundManager.Instance.PlaySoundEffect(poofSound);
+                boxCollider2D.enabled = false;
+                GameManager.Instance.SetIsGameOver(true);
                 PlayerAnimationManager.Instance.TryTriggerDeath();
             }
             else
             {
-                PlayerAnimationManager.Instance.SetIsHurting(true);
-                SoundManager.Instance.PlaySoundEffect(hurtSound);
-                PlayerAnimationManager.Instance.TryTriggerHurt();
-                shieldObject.SetActive(false);
-                hasShield = false;
+                if (!PlayerAnimationManager.Instance.GetIsHurting())
+                {
+                    PlayerAnimationManager.Instance.SetIsHurting(true);
+                    SoundManager.Instance.PlaySoundEffect(hurtSound);
+                    PlayerAnimationManager.Instance.TryTriggerHurt();
+                    shieldObject.SetActive(false);
+                    hasShield = false;
+                }
+                
             }
 
-            collision.gameObject.SetActive(false);
+            // WHY LMAO?
+            if (collision.gameObject.tag == "Enemy")
+            {
+                collision.gameObject.SetActive(false);
+            }
+            
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<IObstacle>() != null
-            && GameManager.Instance.GetObstacleStart())
+            && GameManager.Instance.GetObstacleStart()
+            && GameManager.Instance.GetStartGame())
         {
             if (!hasShield && !PlayerAnimationManager.Instance.GetIsHurting())
             {
                 SoundManager.Instance.PlaySoundEffect(poofSound);
+                boxCollider2D.enabled = false;
+                GameManager.Instance.SetIsGameOver(true);
                 PlayerAnimationManager.Instance.TryTriggerDeath();
             }
             else
             {
-                PlayerAnimationManager.Instance.SetIsHurting(true);
-                SoundManager.Instance.PlaySoundEffect(hurtSound);
-                PlayerAnimationManager.Instance.TryTriggerHurt();
-                shieldObject.SetActive(false);
-                hasShield = false;
+                if (!PlayerAnimationManager.Instance.GetIsHurting())
+                {
+                    PlayerAnimationManager.Instance.SetIsHurting(true);
+                    SoundManager.Instance.PlaySoundEffect(hurtSound);
+                    PlayerAnimationManager.Instance.TryTriggerHurt();
+                    shieldObject.SetActive(false);
+                    hasShield = false;
+                }
             }
+            
 
             collision.gameObject.SetActive(false);
         }
@@ -157,12 +178,15 @@ public class PlayerController : MonoBehaviour
 
     public void OnDeath()
     {
+        GameManager.Instance.SetBestTime();
+        GameManager.Instance.RefreshGame();
         gameObject.SetActive(false);
+        GameManager.Instance.ReadyRestartInput();
     }
 
     private IEnumerator WaitForObstacles()
     {
-        while (!GameManager.Instance.GetObstacleStart())
+        while (!GameManager.Instance.GetStartGame())
         {
             yield return null; 
         }
